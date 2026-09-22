@@ -1,0 +1,100 @@
+### Add lunch
+POST http://127.0.0.1:5000/expenses
+Content-Type: application/json
+
+{
+    "amount": 12.50,
+    "category": "Food",
+    "description": "Lunch"
+}
+
+### Add bus fare
+POST http://127.0.0.1:5000/expenses
+Content-Type: application/json
+
+{
+    "amount": 99999,
+    "category": "Transport",
+    "description": "Bus Fare",
+    "date": "2026-09-20"
+}
+
+### Add dinner
+POST http://127.0.0.1:5000/expenses
+Content-Type: application/json
+
+{
+    "amount": 10,
+    "category": "Food",
+    "description": "Bus Fare",
+    "date": "2026-09-23"
+}
+
+### Add petrol
+POST http://127.0.0.1:5000/expenses
+Content-Type: application/json
+
+{
+    "amount": 20,
+    "category": "Transport",
+    "description": "Petrol",
+    "date": "2026-09-27"
+}
+### List all expenses
+GET http://127.0.0.1:5000/expenses
+
+### Get one expense
+GET http://127.0.0.1:5000/expenses/3
+
+### Get an expense that dosent exist
+GET http://127.0.0.1:5000/expenses/2
+
+### Delete an expense
+DELETE http://127.0.0.1:5000/expenses/6
+
+
+### Update an expense
+PUT http://127.0.0.1:5000/expenses/3
+Content-Type: application/json
+
+{
+    "amount": 15,
+    "description": "Flight"
+}
+
+
+### BAD REQUEST - no amount
+POST http://127.0.0.1:5000/expenses
+Content-Type: application/json
+
+{
+    "amount": 10,
+    "category": 15
+}
+
+### Summary - all time
+GET http://127.0.0.1:5000/summary
+
+### Summary - one month
+GET http://127.0.0.1:5000/summary?month=2026-09
+
+### Set a budget - FOOD
+POST http://127.0.0.1:5000/budgets
+Content-Type: application/json
+
+{
+  "category": "Food",
+  "monthly_limit": 10
+}
+
+### Set a budget
+POST http://127.0.0.1:5000/budgets
+Content-Type: application/json
+
+{
+  "category": "Transport",
+  "monthly_limit": 50
+}
+
+### Summary with budget check
+GET http://127.0.0.1:5000/summary
