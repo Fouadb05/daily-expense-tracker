@@ -1,0 +1,24 @@
+{
+  "name": "daily-expense-tracker",
+  "version": "1.0.0",
+  "description": "A personal budgeting API built with Python, Flask, and SQLite.",
+  "main": "logic.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fouadb05/daily-expense-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Fouadb05/daily-expense-tracker/issues"
+  },
+  "homepage": "https://github.com/Fouadb05/daily-expense-tracker#readme",
+  "devDependencies": {
+    "jest": "^30.5.2"
+  }
+}

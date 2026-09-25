@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Daily Expense Tracker</title>
+  <link rel="stylesheet" href="style.css">  
 </head>
 <body>
   <h1>Daily Expense Tracker</h1>
@@ -15,17 +16,25 @@
     <input type="text" id="description" placeholder="Description">
     <button type="submit">Save</button>
   </form>
+
+  <div class="section">
     <h2>Expenses</h2>
+    <ul id="expense-list"></ul>
+  </div>
+
+  <div class="section">
     <h2>Summary</h2>
     <p id="total"></p>
     <ul id="summary-list"></ul>
-    <ul id="expense-list"></ul>
-    <h2>Set a Budget</h2>
-    <form id="budget-form">
-        <input type="text" id="budget-category" placeholder="Category" required>
-        <input type="number" id="budget-limit" placeholder="Monthly limit" step="0.01" required>
-        <button type="submit">Set Budget</button>
-    </form>
+  </div>
+
+  <h2>Set a Budget</h2>
+  <form id="budget-form">
+    <input type="text" id="budget-category" placeholder="Category" required>
+    <input type="number" id="budget-limit" placeholder="Monthly limit" step="0.01" required>
+    <button type="submit">Set Budget</button>
+  </form>
+    <script src="logic.js"></script>
     <script>
     const API_URL = "http://127.0.0.1:5000";
     const form = document.getElementById("expense-form");
@@ -102,16 +111,7 @@ function loadSummary() {
 
       summary.by_category.forEach((entry) => {
         const item = document.createElement("li");
-        let text = `${entry.category}: €${entry.total}`;
-
-        if (entry.budget !== null) {
-          text += ` (budget: €${entry.budget})`;
-          if (entry.over_budget) {
-            text += " — OVER BUDGET";
-          }
-        }
-
-        item.textContent = text + " ";
+        item.textContent = formatSummaryLine(entry) + " ";
 
         const editButton = document.createElement("button");
         editButton.textContent = "Edit Budget";
@@ -152,8 +152,7 @@ function editBudget(category, budget) {
             description: description,
         });
 
-        const url = id ? `${API_URL}/expenses/${id}` : `${API_URL}/expenses`;
-        const method = id ? "PUT" : "POST";
+        const { url, method } = buildRequestConfig(id, API_URL);
 
         fetch(url, {
             method: method,
