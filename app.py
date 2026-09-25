@@ -1,10 +1,12 @@
 import sqlite3
 from datetime import date
 from flask import Flask, request, jsonify
-
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 import os
 DATABASE = os.environ.get("DATABASE", "expenses.db")
+
 
 def get_db():
     conn = sqlite3.connect(DATABASE)
@@ -49,6 +51,8 @@ def validate_expense_data(data):
         return "category is required"
     if not isinstance(category, (str)):
         return "Category is required to be text"
+    if category.strip().isdigit():
+        return "category cannot be only numbers"
 
 
     return None
